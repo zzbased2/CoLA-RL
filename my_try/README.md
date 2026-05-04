@@ -3,6 +3,47 @@
 > 这个目录存放本次本地复现尝试的**所有产出**（计划文档、脚本、评测结果、总结报告），
 > 原项目的 `verl/`、`recipe/`、`scripts/`、`cola_data/` 等**保持原样不动**。
 
+## 🌐 Git 仓库信息
+
+本地 fork 自原项目并在此基础上扩展。采用标准 **fork 工作流**：
+
+| remote | URL | 用途 |
+| --- | --- | --- |
+| **origin** | <https://github.com/zzbased2/CoLA-RL.git> | **我的 fork**，本次所有工作的推送目标 |
+| **upstream** | <https://github.com/ytzfhqs/CoLA-RL.git> | 原作者仓库，用于同步上游更新 |
+
+**日常推送**（分支跟踪已建立）：
+
+```bash
+cd /data/workspace/Github-open/CoLA-RL
+git add my_try/
+git commit -m "your message"
+git push   # 自动推到 origin/main
+```
+
+**同步上游原作者的更新**（如有新版本）：
+
+```bash
+git fetch upstream
+git merge upstream/main       # 或 git rebase upstream/main
+git push
+```
+
+**首次配置该 fork 工作流的历史步骤**（已完成，仅留作记录）：
+
+```bash
+# 1. 原 origin 指向作者仓库，把它重命名为 upstream
+git remote rename origin upstream
+
+# 2. 新增 origin 指向自己的 fork
+git remote add origin https://github.com/zzbased2/CoLA-RL.git
+
+# 3. 推送并建立分支跟踪
+git push -u origin main
+```
+
+---
+
 ## 🗺 导航
 
 **总计划文档**：[`my_try.md`](./my_try.md) ← **从这里看起**
