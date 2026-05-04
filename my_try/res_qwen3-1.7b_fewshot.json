@@ -1,0 +1,123 @@
+{
+  "prompt": "fewshot",
+  "enable_thinking": false,
+  "max_new_tokens": 32,
+  "results": [
+    {
+      "model": "model/Qwen3-1.7B",
+      "prompt": "fewshot",
+      "enable_thinking": false,
+      "max_new_tokens": 32,
+      "batch_size": 8,
+      "samples": 527,
+      "mcc": 0.4987587362700726,
+      "accuracy": 0.7912713472485768,
+      "parse_fail": 0,
+      "avg_new_tokens": 2.28,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            100,
+            62
+          ],
+          [
+            48,
+            317
+          ]
+        ],
+        "tp": 317,
+        "fp": 62,
+        "fn": 48,
+        "tn": 100
+      },
+      "elapsed_sec": 20.2,
+      "throughput_samples_per_sec": 26.133,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "unacceptable",
+          "new_tokens": 3,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "unacceptable",
+          "new_tokens": 3,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "unacceptable",
+          "new_tokens": 3,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "unacceptable",
+          "new_tokens": 3,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "acceptable",
+          "new_tokens": 2,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "dataset": "in_domain_dev.tsv",
+  "n_train": 8551,
+  "n_dev": 527,
+  "train_acc_rate": 0.704362062916618,
+  "dev_acc_rate": 0.6925996204933587,
+  "results": [
+    {
+      "name": "B1_Majority",
+      "mcc": 0.0,
+      "accuracy": 0.6925996204933587,
+      "pred_acc_rate": 1.0,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable(0)",
+          "acceptable(1)"
+        ],
+        "matrix": [
+          [
+            0,
+            162
+          ],
+          [
+            0,
+            365
+          ]
+        ],
+        "tp": 365,
+        "fp": 162,
+        "fn": 0,
+        "tn": 0
+      },
+      "elapsed_sec": 0.0
+    },
+    {
+      "name": "B2_Random",
+      "mcc": -0.027472065859867043,
+      "accuracy": 0.5692599620493358,
+      "pred_acc_rate": 0.7096774193548387,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable(0)",
+          "acceptable(1)"
+        ],
+        "matrix": [
+          [
+            44,
+            118
+          ],
+          [
+            109,
+            256
+          ]
+        ],
+        "tp": 256,
+        "fp": 118,
+        "fn": 109,
+        "tn": 44
+      },
+      "elapsed_sec": 0.0
+    },
+    {
+      "name": "B3_LengthThresh",
+      "mcc": 0.07813572774308056,
+      "accuracy": 0.6869070208728653,
+      "pred_acc_rate": 0.9411764705882353,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable(0)",
+          "acceptable(1)"
+        ],
+        "matrix": [
+          [
+            14,
+            148
+          ],
+          [
+            17,
+            348
+          ]
+        ],
+        "tp": 348,
+        "fp": 148,
+        "fn": 17,
+        "tn": 14
+      },
+      "elapsed_sec": 0.073,
+      "best_k": 4,
+      "train_mcc": 0.01748314990702076
+    },
+    {
+      "name": "B4_CharNgramLR",
+      "mcc": 0.12940983920306834,
+      "accuracy": 0.5996204933586338,
+      "pred_acc_rate": 0.6072106261859582,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable(0)",
+          "acceptable(1)"
+        ],
+        "matrix": [
+          [
+            79,
+            83
+          ],
+          [
+            128,
+            237
+          ]
+        ],
+        "tp": 237,
+        "fp": 83,
+        "fn": 128,
+        "tn": 79
+      },
+      "elapsed_sec": 2.844,
+      "n_features": 26632
+    },
+    {
+      "name": "B5_WordNgramLR",
+      "mcc": 0.17631778236209805,
+      "accuracy": 0.635673624288425,
+      "pred_acc_rate": 0.650853889943074,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable(0)",
+          "acceptable(1)"
+        ],
+        "matrix": [
+          [
+            77,
+            85
+          ],
+          [
+            107,
+            258
+          ]
+        ],
+        "tp": 258,
+        "fp": 85,
+        "fn": 107,
+        "tn": 77
+      },
+      "elapsed_sec": 1.966,
+      "n_features": 12267
+    }
+  ]
+}

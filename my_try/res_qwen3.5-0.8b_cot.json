@@ -1,0 +1,123 @@
+{
+  "prompt": "cot",
+  "enable_thinking": false,
+  "max_new_tokens": 256,
+  "results": [
+    {
+      "model": "model/Qwen3.5-0.8B",
+      "prompt": "cot",
+      "enable_thinking": false,
+      "max_new_tokens": 256,
+      "batch_size": 8,
+      "samples": 527,
+      "mcc": 0.20270695198676209,
+      "accuracy": 0.6679316888045541,
+      "parse_fail": 2,
+      "avg_new_tokens": 62.32,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            68,
+            94
+          ],
+          [
+            81,
+            284
+          ]
+        ],
+        "tp": 284,
+        "fp": 94,
+        "fn": 81,
+        "tn": 68
+      },
+      "elapsed_sec": 414.5,
+      "throughput_samples_per_sec": 1.272,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "acceptable\n",
+          "new_tokens": 3,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "The sentence is grammatically acceptable.\n\n**Step-by-step analysis:**\n1.  **Subject-Verb Agreement**: The subject is \"The weights\" (plural). The verb \"stretch\" is used in the past tense (\"made\"), which is grammatically correct for a plural subject.\n2.  **Argument Structure**: The sentence follows the standard subject-verb-object structure. \"The weights\" is the subject, \"made\" is the verb, and \"the rope stretch\" is the object phrase.\n3.  **Word Order**: The sentence is in standard English word order.\n4.  **Meaning**: The sentence conveys a clear and logical meaning: the action of stretching the rope was caused by the weights.\n\nTherefore, the sentence is acceptable.\n\nacceptable\n",
+          "new_tokens": 162,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "acceptable\n",
+          "new_tokens": 3,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "unacceptable\n",
+          "new_tokens": 4,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "unacceptable\n",
+          "new_tokens": 4,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "acceptable\n",
+          "new_tokens": 3,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "unacceptable\n",
+          "new_tokens": 4,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "unacceptable\n",
+          "new_tokens": 4,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "The sentence is grammatically acceptable.\n\n**Step-by-step analysis:**\n1.  **Subject-Verb Agreement**: The subject is \"The angrier Mary got.\" The verb \"got\" is in the past tense and agrees with the plural subject \"Mary\" (or the singular \"Mary\" if treated as a person, but the phrase \"The angrier Mary got\" implies a comparison between two people, making \"got\" plural).\n2.  **Argument Structure**: The sentence follows the standard comparative structure: \"[Subject] [verb], [adverbial phrase], [subject] [verb].\" Here, \"The angrier Mary got\" acts as the subject, and \"the more she looked at pictures\" acts as the adverbial phrase modifying the verb \"got.\"\n3.  **Word Order**: The sentence follows standard English word order (Subject-Verb-Object/Adverbial).\n4.  **Meaning**: The sentence conveys a clear meaning: The angrier Mary got (gained) more satisfaction by looking at pictures.\n\nTherefore, the sentence is acceptable.\n\nacceptable\n",
+          "new_tokens": 229,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "acceptable\n",
+          "new_tokens": 3,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "prompt": "cot",
+  "enable_thinking": false,
+  "max_new_tokens": 256,
+  "results": [
+    {
+      "model": "model/Qwen3-1.7B",
+      "prompt": "cot",
+      "enable_thinking": false,
+      "max_new_tokens": 256,
+      "batch_size": 8,
+      "samples": 527,
+      "mcc": 0.13923254360661505,
+      "accuracy": 0.681214421252372,
+      "parse_fail": 37,
+      "avg_new_tokens": 194.14,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            36,
+            126
+          ],
+          [
+            42,
+            323
+          ]
+        ],
+        "tp": 323,
+        "fp": 126,
+        "fn": 42,
+        "tn": 36
+      },
+      "elapsed_sec": 711.0,
+      "throughput_samples_per_sec": 0.741,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Identify the subject and verb.  \n- Subject: \"The sailors\"  \n- Verb: \"rode\"\n\nStep 2: Check subject-verb agreement.  \n- \"The sailors\" is a plural subject.  \n- \"Rode\" is the correct verb form for \"sailors\" (plural).  \n- So, subject-verb agreement is correct.\n\nStep 3: Check word order.  \n- The sentence is structured as: \"The sailors rode the breeze clear of the rocks.\"  \n- The phrase \"the breeze clear of the rocks\" is a prepositional phrase modifying \"the breeze.\"  \n- The word order is correct.\n\nStep 4: Check for any grammatical errors or awkward phrasing.  \n- \"Rode the breeze\" is a common phrasal verb.  \n- \"Clear of the rocks\" is a correct prepositional phrase.  \n- The sentence is grammatically correct and flows naturally.\n\nFinal Answer: acceptable",
+          "new_tokens": 200,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Identify the subject and verb.  \n- Subject: \"The weights\"  \n- Verb: \"made\"  \n\nStep 2: Check subject-verb agreement.  \n- \"The weights\" is a singular noun, and \"made\" is the correct form of the verb \"to make\" in the past tense for a singular subject.  \n\nStep 3: Check the phrase \"stretch over the pulley.\"  \n- \"Stretch\" is a verb, and \"over the pulley\" is a prepositional phrase.  \n- The phrase \"stretch over\" is grammatically correct in this context.  \n\nStep 4: Check word order.  \n- The sentence is structured as: \"The weights [subject] made [verb] the rope [object] stretch [verb] over the pulley [prepositional phrase].\"  \n- The word order is correct.  \n\nConclusion: The sentence is grammatically acceptable.\n\nacceptable",
+          "new_tokens": 191,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Identify the subject and verb.  \n- Subject: \"The mechanical doll\"  \n- Verb: \"wriggled itself loose\"\n\nStep 2: Check subject-verb agreement.  \n- The subject \"the mechanical doll\" is singular.  \n- The verb \"wriggled\" is singular, so it agrees with the subject.\n\nStep 3: Check the phrase \"itself loose.\"  \n- \"Itself\" is a pronoun that refers back to the subject \"the mechanical doll.\"  \n- The phrase \"itself loose\" is grammatically correct in this context.\n\nStep 4: Check word order.  \n- The sentence is structured as \"The mechanical doll [verb] [itself loose].\"  \n- The word order is correct.\n\nConclusion: The sentence is grammatically acceptable.\n\nacceptable",
+          "new_tokens": 169,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Analyze the sentence structure.  \nThe sentence is: \"If you had eaten more, you would want less.\"\n\nStep 2: Identify the subject-verb agreement.  \n- \"You\" is the subject of both clauses.  \n- In the first clause, \"you\" is singular, so the verb \"had\" should be singular (\"had\").  \n- In the second clause, \"you\" is still singular, so the verb \"would want\" should be singular (\"would want\").\n\nStep 3: Check the word order.  \n- The sentence is a conditional sentence of the second type: \"If + past perfect, then + would + base verb.\"  \n- The structure is correct: \"If you had eaten more, you would want less.\"\n\nStep 4: Check for logical consistency.  \n- The sentence is logically consistent: if someone eats more, they might want less (e.g., less food, less sugar, etc.).\n\nStep 5: Conclusion.  \nThe sentence is grammatically acceptable.\n\nFinal answer: acceptable",
+          "new_tokens": 214,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "Step 1: Identify the subject and verb in the sentence.  \n- The subject is \"you\" (plural) in the first part of the sentence.  \n- The verb is \"eat\" in the first part.  \n\nStep 2: Check subject-verb agreement.  \n- \"You\" is plural, so the verb \"eat\" is correct.  \n\nStep 3: Analyze the structure of the sentence.  \n- The sentence is a compound sentence with two clauses connected by \"as\" (as you eat the most, you want the least).  \n- The structure is grammatically correct in terms of subject-verb agreement and word order.  \n\nStep 4: Consider the logic of the sentence.  \n- The sentence is logically coherent: the more you eat, the less you want.  \n- The use of \"the most\" and \"the least\" is correct in this context.  \n\nConclusion: The sentence is grammatically acceptable.\n\nacceptable",
+          "new_tokens": 195,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "Step 1: Analyze the sentence structure.  \nThe sentence is: \"The more you would want, the less you would eat.\"\n\nStep 2: Identify the subject-verb agreement.  \n- \"The more you would want\" is a comparative structure.  \n  - \"The more\" is a comparative adverb, and \"you\" is the subject.  \n  - \"Would want\" is the verb form, and \"you\" is the subject.  \n  - This is grammatically correct.\n\n- \"The less you would eat\" is another comparative structure.  \n  - \"The less\" is a comparative adverb, and \"you\" is the subject.  \n  - \"Would eat\" is the verb form, and \"you\" is the subject.  \n  - This is grammatically correct.\n\nStep 3: Check the argument structure.  \n- Both clauses are in the same subject-verb agreement (you).  \n- The structure \"The more X, the less Y\" is a common and grammatically acceptable structure in English.\n\nStep 4: Consider word order.  \n- The sentence follows the standard word order for comparative structures:  \n  - \"The more [subject], the less [subject].\"  \n  - This is correct.\n\n",
+          "new_tokens": 256,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "Step 1: Analyze the sentence structure.  \nThe sentence is: \"I demand that the more John eat, the more he pays.\"\n\nStep 2: Identify the main clause and the subordinate clause.  \nThe main clause is \"I demand that...\" and the subordinate clause is \"the more John eat, the more he pays.\"\n\nStep 3: Check subject-verb agreement in the subordinate clause.  \nIn the subordinate clause, the subject is \"the more John eat, the more he pays.\" This is a compound sentence with two clauses connected by \"that\" and \"and.\" The subject is \"the more John eat, the more he pays,\" which is a compound subject. The verb \"eat\" and \"pay\" are both in the present tense, but they are not in the same subject.\n\nStep 4: Check the argument structure.  \nThe subject \"the more John eat\" is a compound subject, and the verb \"eat\" is in the present tense. The subject \"the more he pays\" is a compound subject, and the verb \"pays\" is in the present tense. The verbs \"eat\" and \"pays\" are in different subjects, so they are not in the same subject.\n\nStep 5: Check word order",
+          "new_tokens": 256,
+          "parsed": null,
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Analyze the sentence structure.  \nThe sentence is: \"Mary listens to the Grateful Dead, she gets depressed.\"\n\nStep 2: Identify the subject-verb agreement.  \n- \"Mary\" is a singular subject.  \n- The verb \"listens\" is singular, so it agrees with \"Mary.\"  \n- The verb \"gets\" is also singular, so it agrees with \"she.\"\n\nStep 3: Check the word order.  \n- The sentence is a compound sentence with a comma before the second clause.  \n- The structure is: \"Mary listens to the Grateful Dead, she gets depressed.\"  \n- This is grammatically correct in terms of word order.\n\nStep 4: Check for logical consistency.  \n- \"Mary listens to the Grateful Dead\" is a complete sentence.  \n- \"She gets depressed\" is a complete sentence.  \n- The two clauses are connected by a comma, which is correct.\n\nStep 5: Determine if the sentence is grammatically acceptable.  \n- The sentence is grammatically correct in terms of subject-verb agreement, word order, and structure.  \n- The logical connection between the two clauses is also appropriate.\n\nFinal Answer: acceptable",
+          "new_tokens": 247,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Identify the structure of the sentence.  \nThe sentence is: \"The angrier Mary got, the more she looked at pictures.\"\n\nStep 2: Analyze the subject-verb agreement.  \n- \"Mary\" is the subject of the first clause.  \n- \"Got\" is the verb in the first clause.  \n- \"The angrier Mary got\" is a relative clause modifying \"Mary.\"  \n- The verb \"got\" is in the past tense, and the subject \"Mary\" is singular, so the verb should be \"got\" (correct).  \n\nStep 3: Analyze the second clause.  \n- \"The more she looked at pictures\" is a comparative clause.  \n- \"She\" is the subject of the second clause.  \n- \"Looked\" is the verb in the second clause.  \n- \"She\" is singular, so \"looked\" is correct.  \n\nStep 4: Analyze the relationship between the clauses.  \n- The sentence is a **contrast** between two clauses:  \n  - \"The angrier Mary got\" (more angry Mary got)  \n  - \"The more she looked at pictures\" (the more she looked at pictures)  \n- The structure is: \"The",
+          "new_tokens": 256,
+          "parsed": null,
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "Step 1: Identify the subject and verb in the sentence.  \nThe subject is \"the higher the stakes,\" which is a relative clause acting as the subject.  \nThe verb is \"are,\" which is a plural verb.\n\nStep 2: Check subject-verb agreement.  \nThe subject \"the higher the stakes\" is a singular noun phrase (a relative clause), but it is treated as a singular subject in this sentence.  \nThe verb \"are\" is plural, which does not agree with the singular subject.\n\nStep 3: Consider the structure.  \nThe sentence is a complex sentence with a relative clause as the subject.  \nThe verb \"are\" is plural, but the subject \"the higher the stakes\" is singular, so the verb should be \"is.\"\n\nStep 4: Correct the sentence.  \nThe correct sentence would be: \"The higher the stakes, the lower his expectations are.\"  \nThis is grammatically acceptable because \"the higher the stakes\" is treated as a singular subject, and \"are\" is the correct plural verb.\n\nFinal answer: acceptable",
+          "new_tokens": 219,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

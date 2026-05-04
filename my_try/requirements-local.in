@@ -1,0 +1,17 @@
+# CoLA-RL 本地环境源依赖清单
+# 版本下限按 my_try.md §2.4 给出，具体安装版本请看 requirements-local.txt（pip freeze 产出）
+torch>=2.3
+transformers>=4.45
+datasets>=3.0
+peft>=0.13
+accelerate>=1.0
+trl>=0.12
+bitsandbytes>=0.43
+scikit-learn
+pandas
+pyarrow
+tqdm
+tensorboard
+jupyter
+ipykernel
+matplotlib

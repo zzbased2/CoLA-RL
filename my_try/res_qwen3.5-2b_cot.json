@@ -1,0 +1,123 @@
+{
+  "prompt": "cot",
+  "enable_thinking": false,
+  "max_new_tokens": 256,
+  "results": [
+    {
+      "model": "model/Qwen3.5-2B",
+      "prompt": "cot",
+      "enable_thinking": false,
+      "max_new_tokens": 256,
+      "batch_size": 8,
+      "samples": 527,
+      "mcc": 0.2139503045964966,
+      "accuracy": 0.6698292220113852,
+      "parse_fail": 63,
+      "avg_new_tokens": 169.33,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            71,
+            91
+          ],
+          [
+            83,
+            282
+          ]
+        ],
+        "tp": 282,
+        "fp": 91,
+        "fn": 83,
+        "tn": 71
+      },
+      "elapsed_sec": 775.1,
+      "throughput_samples_per_sec": 0.68,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"The sailors rode the breeze clear of the rocks\" is grammatically acceptable.\n\nStep-by-step analysis:\n1.  **Subject-Verb Agreement**: The subject is \"The sailors\" (plural). The verb is \"rode\" (past tense of \"ride\"). Since \"sailors\" is plural, the verb must be plural. \"Rode\" is the correct past tense form for plural subjects.\n2.  **Argument Structure**: The sentence contains a subject (\"The sailors\") and a predicate (\"rode the breeze clear of the rocks\"). The prepositional phrases \"the breeze\" and \"clear of the rocks\" function as adverbial modifiers describing the manner in which the sailing occurred. The structure is valid.\n3.  **Word Order**: The standard SVO (Subject-Verb-Object) order is maintained, with modifiers placed appropriately after the verb phrase.\n4.  **Meaning**: The sentence conveys a clear and logical action.\n\nacceptable\n",
+          "new_tokens": 207,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"The weights made the rope stretch over the pulley\" is grammatically acceptable.\n\nStep-by-step analysis:\n1.  **Subject-Verb Agreement**: The subject is \"The weights\" (plural). The verb is \"made\" (past tense of \"make\"). In standard English, plural subjects take plural verbs. However, the verb \"make\" can be used intransitively to mean \"cause to happen\" or \"cause to occur\" (e.g., \"The rain made the road wet\"). When used intransitively, it does not require a plural verb form like \"were\" or \"are\". Therefore, \"made\" is the correct form for the subject \"weights\".\n2.  **Argument Structure**: The sentence follows the pattern \"Subject + made + Object + Verb Phrase\". The object is \"the rope\", and the verb phrase is \"stretch over the pulley\". This structure is valid.\n3.  **Word Order**: The order of the words (Subject, Verb, Object, Complement) is correct.\n4.  **Meaning**: The sentence conveys a clear and logical meaning: the weights caused the rope to stretch.\n\nThe sentence is grammatically acceptable.\n\nacceptable\n",
+          "new_tokens": 255,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"The mechanical doll wriggled itself loose\" contains a subject (\"The mechanical doll\") and a verb phrase (\"wriggled itself loose\"). The verb \"wriggled\" is in the past tense, which agrees with the singular subject \"doll\". The reflexive pronoun \"itself\" is correctly used to indicate that the doll wriggled itself. The word order is standard. There are no errors in subject-verb agreement, argument structure, or word order.\n\nacceptable\n",
+          "new_tokens": 104,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"If you had eaten more, you would want less\" is a classic example of the **Third Conditional** in English grammar. This structure is used to talk about hypothetical situations in the past that did not happen.\n\nHere is the step-by-step grammatical analysis:\n1.  **Condition Clause**: \"If you had eaten more\".\n    *   **Subject**: \"you\" (singular).\n    *   **Verb**: \"had eaten\" (past perfect).\n    *   **Agreement**: The auxiliary verb \"had\" agrees with the singular subject \"you\". The past participle \"eaten\" is correct.\n    *   **Structure**: The past perfect tense is correctly used in the \"if\" clause to indicate a condition that is contrary to the past.\n2.  **Main Clause**: \"you would want less\".\n    *   **Subject**: \"you\" (singular).\n    *   **Verb**: \"would want\" (conditional simple).\n    *   **Agreement**: The modal verb \"would\" agrees with the singular subject \"you\". The base form \"want\" is correct.\n    *   **Structure**: The conditional simple tense is correctly used in the main clause to describe",
+          "new_tokens": 256,
+          "parsed": null,
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "The sentence \"As you eat the most, you want the least\" follows a logical structure where the subject \"you\" is repeated in both clauses. The verb \"eat\" is in the present tense, and the verb \"want\" is also in the present tense, maintaining consistent subject-verb agreement. The word order is correct, with the adverbial phrase \"As you eat the most\" functioning as a dependent clause that sets up the main clause. The meaning is clear and the syntax is standard English.\n\nacceptable\n",
+          "new_tokens": 107,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "The sentence \"The more you would want, the less you would eat\" follows the standard correlative conjunction structure \"The + comparative, the + comparative.\"\n\n1.  **Subject-Verb Agreement**: The subjects are \"you\" in both clauses. \"You\" is a singular third-person pronoun, and the verbs \"would want\" and \"would eat\" are correctly conjugated to match this singular subject.\n2.  **Argument Structure**: The sentence expresses a logical relationship between two dependent clauses. The first clause sets up a condition (more want), and the second clause provides the corresponding result (less eat). This is a valid argumentative structure.\n3.  **Word Order**: The word order in both clauses is standard English (Subject + Auxiliary Verb + Main Verb).\n4.  **Grammar Acceptability**: This is a well-known rhetorical device often used in advertising and logic to emphasize a trade-off. It is grammatically correct and idiomatic.\n\nacceptable\n",
+          "new_tokens": 201,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "The sentence \"I demand that the more John eat, the more he pays\" attempts to use the subjunctive mood (\"eat\") after the verb \"demand\" to express a condition or a wish.\n\n1.  **Subject-Verb Agreement**: The subject of the subordinate clause is \"the more John eat\". In this construction, \"the more\" functions as a comparative adverb modifying the verb \"eat\". The verb \"eat\" is in the base form, which is correct for the subjunctive mood in the present tense.\n2.  **Argument Structure**: The structure \"the more [noun] [verb], the more [noun] [verb]\" is a standard correlative comparative structure. Here, \"John\" is the subject of the first clause, and \"he\" is the subject of the second clause. The pronouns are correctly used to refer back to the antecedents.\n3.  **Word Order**: The word order \"the more John eat\" is grammatically correct for the subjunctive comparative.\n4.  **Acceptability**: While the sentence is slightly awkward in natural English (often people might say \"I demand that the more John eats\" or \"I demand that the more John eats\"), it is grammatically",
+          "new_tokens": 256,
+          "parsed": null,
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"Mary listens to the Grateful Dead, she gets depressed\" contains a comma splice, which is a grammatical error where two independent clauses are joined by a comma without a coordinating conjunction. While some informal styles might accept this, standard grammatical rules classify it as incorrect.\n\nunacceptable\n",
+          "new_tokens": 62,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"The angrier Mary got, the more she looked at pictures\" follows the structure of a correlative conditional clause (specifically, a type of \"the... the...\" construction).\n\n1.  **Subject-Verb Agreement**: The first clause \"The angrier Mary got\" is a reduced relative clause. The subject is \"Mary\", and the verb is \"got\". The adjective \"angrier\" agrees with the subject \"Mary\" (comparative form of \"angry\").\n2.  **Argument Structure**: The second clause \"the more she looked at pictures\" is a reduced relative clause. The subject is \"she\", and the verb is \"looked\". The comparative adverb \"more\" agrees with the subject \"she\".\n3.  **Word Order**: The word order in both clauses is standard English (Subject + Adjective/Adverb + Verb).\n4.  **Punctuation**: The comma correctly separates the two independent clauses (or rather, the two dependent clauses functioning as correlative parts) in this construction.\n\nThe sentence is grammatically correct and idiomatic.\n\nacceptable\n",
+          "new_tokens": 231,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "The sentence \"The higher the stakes, the lower his expectations are.\" follows the standard correlative conjunction structure \"the... the...\", which requires parallel structure in the predicate.\n\n1.  **Subject-Verb Agreement**: The first clause has the subject \"stakes\" (singular) and the verb \"are\" (plural). This is a common stylistic variation in English where the plural verb agrees with the plural noun \"stakes\" even when the subject is singular, or it functions as a general rule. However, strictly speaking, \"stakes\" is singular, so \"is\" would be the grammatically precise agreement. But in idiomatic usage, \"the higher the stakes, the lower...\" is widely accepted and considered acceptable.\n2.  **Argument Structure**: The structure \"The [adjective] the [noun], the [adjective] the [noun]\" is a standard rhetorical device. The second clause correctly mirrors the first: \"the lower his expectations are\".\n3.  **Word Order**: The word order is correct. The subject (\"stakes\") and the verb (\"are\") are in the correct position.\n\nWhile a strict prescriptive grammar might argue for \"is\" to agree with \"stakes\", the sentence is widely used in literature and speech and",
+          "new_tokens": 256,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

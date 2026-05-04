@@ -1,0 +1,123 @@
+{
+  "prompt": "thinking",
+  "enable_thinking": true,
+  "max_new_tokens": 1024,
+  "results": [
+    {
+      "model": "model/Qwen3-1.7B",
+      "prompt": "thinking",
+      "enable_thinking": true,
+      "max_new_tokens": 1024,
+      "batch_size": 8,
+      "samples": 527,
+      "mcc": 0.43100786602553715,
+      "accuracy": 0.7628083491461101,
+      "parse_fail": 7,
+      "avg_new_tokens": 416.03,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            93,
+            69
+          ],
+          [
+            56,
+            309
+          ]
+        ],
+        "tp": 309,
+        "fp": 69,
+        "fn": 56,
+        "tn": 93
+      },
+      "elapsed_sec": 2611.5,
+      "throughput_samples_per_sec": 0.202,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The sailors rode the breeze clear of the rocks.\" I need to check if it's grammatically correct.\n\nFirst, the subject is \"The sailors,\" which is a plural noun. The verb is \"rode,\" which is the third person singular past tense of \"ride.\" So that's correct. The object here is \"the breeze,\" which is a noun. The phrase \"clear of the rocks\" is a prepositional phrase. \n\nWait, \"clear of\" is a preposition. So \"the breeze clear of the rocks\" would be \"the breeze clear of the rocks.\" But is that correct? Let me think. The preposition \"clear\" is used with a noun, so \"clear of\" is correct. For example, \"the wind clear of the rocks.\" But is \"clear of\" a standard preposition? Or is it \"clear from\"? Hmm. \n\nWait, \"clear of\" is a common phrase. For instance, \"the air is clear of pollutants.\" So \"clear of\" is correct. So the sentence structure is correct. \n\nAnother thing: \"rode\" is the past tense of \"ride,\" which is correct. The sailors are the ones doing the action. The breeze is the object, and \"clear of the rocks\" is the prepositional phrase. \n\nSo the sentence seems grammatically correct. But wait, maybe there's a better way to phrase it. Like \"the sailors rode the breeze clear of the rocks.\" Is there any issue with the preposition? Or maybe \"clear of\" is not the right preposition here. Let me check. \n\nAlternatively, maybe it's \"the breeze clear from the rocks.\" But that would be \"clear from,\" which is different. So \"clear of\" is correct. \n\nSo the sentence is grammatically acceptable. Therefore, the answer is \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 394,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The weights made the rope stretch over the pulley.\" I need to check if it's grammatically correct.\n\nFirst, the subject is \"The weights,\" which is a plural noun. The verb here is \"made,\" which is the past tense of \"make.\" So the structure is Subject + Verb + Object. The object here is \"the rope,\" which is a singular noun. Then there's \"stretch over the pulley.\" \n\nWait, \"stretch\" is a verb, and \"over the pulley\" is a prepositional phrase. So the sentence is \"The weights made the rope stretch over the pulley.\" The problem might be with the preposition. \"Stretch over\" is a bit odd. Normally, you might say \"stretch over the pulley\" or \"stretch around the pulley.\" But \"over the pulley\" is correct. However, the verb \"stretch\" is used in the sense of elongating, so \"stretch over the pulley\" might not be the most natural phrasing. But grammatically, it's correct. \n\nAnother thing: \"made the rope stretch\" is correct. The past tense of \"make\" is \"made,\" and the past participle is \"made.\" So the structure is correct. \n\nSo the sentence is grammatically acceptable. The only possible issue is the phrasing of \"stretch over the pulley,\" but that's not a grammatical error. Therefore, the answer should be \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 314,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The mechanical doll wriggled itself loose.\" I need to check if it's grammatically correct.\n\nFirst, the subject is \"The mechanical doll.\" That's a proper noun, right? So \"mechanical doll\" is the subject. The verb here is \"wriggled.\" Now, \"wriggle\" is a verb that can be used in the third person singular, but in this case, the subject is a singular noun. Wait, \"wriggled\" is the past tense of \"wriggle.\" So the subject is singular, so the verb should be \"wriggles.\" But the sentence uses \"wriggled,\" which is the past tense. Wait, but the subject is \"the mechanical doll,\" which is singular. So the verb should be \"wriggles.\" But the sentence says \"wriggled.\" That's a problem. Because \"wriggle\" is a verb that's usually used with a singular subject, but the past tense is \"wriggled.\" Wait, no, the past tense of \"wriggle\" is \"wriggled,\" but the third person singular is \"wriggles.\" So if the subject is singular, the verb should be \"wriggles.\" So the sentence is using \"wriggled\" instead of \"wriggles.\" That would be incorrect. But wait, maybe the subject is plural? No, the subject is \"the mechanical doll,\" which is singular. So the correct verb would be \"wriggles.\" Therefore, the sentence is grammatically incorrect because it uses \"wriggled\" instead of \"wriggles.\" So the answer should be \"unacceptable.\"\n</think>\n\nunacceptable",
+          "new_tokens": 364,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"If you had eaten more, you would want less.\" I need to check if it's grammatically correct.\n\nFirst, the structure is \"If you had eaten more, you would want less.\" The first part is \"If you had eaten more,\" which is a conditional past perfect. The second part is \"you would want less.\" \n\nWait, the past perfect tense is used here. The main clause is \"you would want less.\" But the condition is \"if you had eaten more,\" which is a past perfect. So the structure is correct in that the past perfect is used for the condition. \n\nBut wait, in English, when you have a conditional that's in the past, the main clause is in the future. So \"If you had eaten more, you would want less.\" That seems okay. But maybe there's a problem with the subject-verb agreement? The subject is \"you,\" and the verb in the main clause is \"would want,\" which is correct. \n\nAnother thing to consider: \"want less\" is correct. The verb \"want\" is in the base form, but since it's in the future, \"would want\" is correct. \n\nIs there any other issue? Maybe the use of \"had eaten\" versus \"eaten.\" The past perfect is \"had eaten,\" which is correct here. \n\nSo I think the sentence is grammatically correct. The structure is correct, the tenses are properly used. So the answer should be \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 318,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"As you eat the most, you want the least.\" I need to check if it's grammatically correct.\n\nFirst, the structure. The sentence starts with \"As you eat the most,\" which is a relative clause. The main clause is \"you want the least.\" But wait, the way it's structured might be a bit off. Let me think. The phrase \"as you eat the most\" is a dependent clause, but the main clause is \"you want the least.\" However, the subject of the main clause is \"you,\" and the verb is \"want.\" So the sentence is \"As you eat the most, you want the least.\" \n\nHmm, the problem here might be the use of \"the most\" in the relative clause. The relative clause \"as you eat the most\" is modifying \"you,\" but does that make sense? Wait, maybe it's a bit confusing. The phrase \"as you eat the most\" is a bit awkward. Normally, we might say \"as you eat the most, you want the least.\" But is that correct?\n\nAlternatively, maybe the sentence is trying to convey that when you eat the most, you want the least. But the structure is a bit off. Let me think about the grammar. The structure \"As [subject] [verb], [subject] [verb]\" is correct. For example, \"As you study, you will pass.\" So in this case, \"As you eat the most, you want the least.\" The subject of the first part is \"you,\" and the verb is \"eat.\" Then the second part is \"you want the least.\" So the structure is correct. \n\nBut wait, the first part is \"As you eat the most,\" which is a relative clause. The main clause is \"you want the least.\" So the sentence is structured as \"As [relative clause], [main clause].\" That's acceptable. \n\nHowever, the use of \"the most\" might be a bit off. The phrase \"as you eat the most\" could be interpreted as \"as you are eating the most,\" but the original sentence is \"as you eat the most.\" So maybe it's a bit unclear. But grammatically, the sentence is correct. \n\nAnother angle: the sentence is a bit of a paradox. If you eat the most, you want the least. But the structure is okay. The main clause is \"you want the least,\" and the relative clause is \"as you eat the most.\" So the sentence is grammatically acceptable. \n\nI think the answer is \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 538,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The more you would want, the less you would eat.\" I need to check if it's grammatically correct.\n\nFirst, the structure is \"The more X, the less Y.\" That's a common structure in English, like \"The more you study, the better your grades.\" So the pattern is correct. \n\nNow, looking at the words. \"The more you would want\" – the \"would\" here is a modal verb. But in this case, the sentence is using \"would\" in the sense of \"would be\" or \"would have.\" Wait, but in the structure \"The more X, the less Y,\" the \"would\" is part of the clause. So \"The more you would want\" is a bit odd. Because \"would\" is used in the present tense, but in this context, it's a hypothetical or conditional. \n\nWait, maybe the sentence is using \"would\" as a modal verb. So \"The more you would want\" – the \"would\" is part of the clause. But is that correct? Let me think. If the sentence is \"The more you want, the less you eat,\" that's correct. But here, the \"would\" is there. So maybe the sentence is using \"would\" to indicate a hypothetical situation. But in the original sentence, the structure is \"The more you would want, the less you would eat.\" \n\nHmm. The problem is that \"would\" is used in both clauses. But in the first clause, \"you would want\" is a hypothetical, and in the second, \"you would eat\" is also hypothetical. But is that correct? \n\nAlternatively, maybe the sentence is using \"would\" as a modal verb in the sense of \"would be\" or \"would have.\" But in this case, the structure is \"The more you would want, the less you would eat.\" So the \"would\" is part of the clause. \n\nWait, but in standard English, \"The more you want, the less you eat\" is correct. So adding \"would\" in both clauses might be a bit awkward. But is it grammatically correct? \n\nAnother angle: the use of \"would\" here. If the sentence is \"The more you would want, the less you would eat,\" the \"would\" is part of the clause. So the structure is correct. But maybe the sentence is trying to say that the more you want, the less you eat, but with a hypothetical. However, the grammar is acceptable. \n\nAlternatively, maybe the sentence is using \"would\" to indicate that the want and eat are hypothetical. But in that case, the structure is correct. \n\nSo, I think the sentence is grammatically acceptable. The structure is correct, and the use of \"would\" in both clauses is acceptable. Therefore, the answer is \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 599,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"I demand that the more John eat, the more he pays.\" I need to check if this is grammatically correct.\n\nFirst, the structure. The main clause is \"I demand that...\" The part after \"that\" is a subordinate clause. The phrase \"the more John eat\" is a bit odd. Normally, in English, when you have a comparison, you use \"the more... the more...\" structure. So \"the more John eats, the more he pays.\" But here, it's \"the more John eat\" with a singular 'e' instead of 'eats'. That's a mistake. The verb should be plural because \"John\" is a singular subject, but the verb should match. So \"eat\" is singular, but the subject is \"John\" which is singular. Wait, no, the subject here is \"John\" in the subordinate clause. Wait, the structure is \"the more John eat, the more he pays.\" So the subject of the subordinate clause is \"John,\" which is singular, but the verb \"eat\" is singular. That's correct because the subject is singular. Wait, but the problem is that the subordinate clause is \"the more John eat,\" which is a comparison. But the correct structure would be \"the more John eats, the more he pays.\" So the verb should be \"eats\" (plural) because the subject is \"John\" (singular). Wait, no, the subject is \"John,\" which is singular, so the verb should be singular. So \"eats\" is correct. But the sentence here is \"the more John eat,\" which is incorrect because \"eat\" is singular, but the subject is \"John\" (singular), so the verb should be \"eats.\" Wait, but the sentence is written as \"the more John eat,\" which is a mistake. So the verb is \"eat\" (singular) but the subject is \"John\" (singular), which is correct. Wait, no, the subject of the subordinate clause is \"John,\" so the verb should be \"eats.\" But the sentence is written as \"the more John eat,\" which is incorrect. Because \"eat\" is singular, but the subject is \"John\" (singular), so the verb should be \"eats.\" So the correct form would be \"the more John eats, the more he pays.\" Therefore, the original sentence has \"eat\" instead of \"eats,\" which is a grammatical error. So the sentence is not grammatically correct. Therefore, the answer is \"unacceptable.\"\n</think>\n\nunacceptable",
+          "new_tokens": 539,
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"Mary listens to the Grateful Dead, she gets depressed.\" I need to check if it's grammatically correct.\n\nFirst, the structure. The sentence has two clauses connected by a comma. The first part is \"Mary listens to the Grateful Dead,\" which is a complete sentence. The second part is \"she gets depressed.\" But wait, the comma is after the first clause, and the second clause starts with \"she.\" That might be a problem. In English, when you have a dependent clause (like \"she gets depressed\") that comes after a main clause, you need a comma before the dependent clause. So the correct structure would be \"Mary listens to the Grateful Dead, she gets depressed.\" But wait, is that correct? Let me think.\n\nActually, the comma is correctly placed here. The first clause is \"Mary listens to the Grateful Dead,\" and the second clause is \"she gets depressed.\" Since the second clause is a dependent clause (it's a subject + verb), it should be preceded by a comma. So the sentence is correctly structured with a comma before the dependent clause. \n\nBut wait, sometimes people might think that the comma is not needed if the second clause is a complete sentence. However, in this case, the second clause is a dependent clause, so the comma is necessary. So the sentence is grammatically correct. \n\nAnother thing to check: the subject-verb agreement. \"She\" is the subject of the second clause, and \"gets\" is the correct verb form. So that's okay. \n\nAlso, the use of \"the Grateful Dead\" is correct because it's a proper noun. \n\nSo the sentence is grammatically acceptable. The answer should be \"acceptable\".\n</think>\n\nacceptable",
+          "new_tokens": 366,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The angrier Mary got, the more she looked at pictures.\" I need to check if it's grammatically correct.\n\nFirst, the structure here is a bit tricky. It's a sentence with two clauses connected by \"the more... the more...\" structure. Wait, actually, the original sentence is \"The angrier Mary got, the more she looked at pictures.\" So the first part is \"The angrier Mary got\" and the second part is \"the more she looked at pictures.\" \n\nHmm, the \"the more\" structure usually follows a comparison. So the standard structure is \"The more X, the more Y.\" But here, the first part is \"The angrier Mary got\" which is a comparison. So maybe it's a comparison between Mary's anger and her looking at pictures. \n\nWait, the sentence is structured as \"The angrier Mary got, the more she looked at pictures.\" So the first part is \"The angrier Mary got\" which is a comparison, and the second part is \"the more she looked at pictures.\" But the problem is that the first part is a clause that's being used as a subject. Wait, no, the structure is \"The angrier Mary got, the more she looked...\" So the first part is a clause that's being used as a subject, but the second part is the dependent clause. \n\nWait, maybe the sentence is trying to say that as Mary became angrier, the more she looked at pictures. But the way it's written is a bit confusing. The first part is \"The angrier Mary got\" which is a clause that's being used as a subject, but the second part is the dependent clause. However, in English, the structure \"The more X, the more Y\" is used when comparing two things. But here, the first part is \"The angrier Mary got\" which is a comparison. So maybe the sentence is trying to say that the more Mary got angrier, the more she looked at pictures. \n\nBut the problem is that the first part is \"The angrier Mary got\" which is a bit awkward. Because \"The angrier Mary got\" would be a bit confusing. Normally, you would say \"The more angry Mary got, the more she looked...\" but here it's \"The angrier Mary got\" which is a bit odd. \n\nWait, maybe the sentence is using a relative clause. Let me think. The structure is \"The angrier Mary got, the more she looked...\" So \"The angrier Mary got\" is a subject, and the second part is the dependent clause. But in English, the structure \"The more X, the more Y\" is used when X and Y are both nouns. So here, \"The angrier Mary got\" is a noun phrase, and \"the more she looked...\" is the dependent clause. \n\nBut the problem is that \"The angrier Mary got\" is a bit awkward. Because \"angrier\" is an adjective, and \"Mary got\" is a verb. So the structure is \"The angrier Mary got\" which is a noun phrase (The angrier Mary) followed by a verb (got). But that's not a standard structure. Normally, you would say \"The more angry Mary got, the more she looked...\" but here it's \"The angrier Mary got\" which is a bit confusing. \n\nAlternatively, maybe the sentence is trying to use a relative clause. For example, \"The angrier Mary got, the more she looked...\" but that doesn't make much sense. The first part is a subject, and the second part is the dependent clause. \n\nWait, maybe the sentence is a bit of a run-on. But the main issue is the structure. The \"the more\" part is correct, but the first part is a bit off. So the sentence is grammatically acceptable? Or is it not? \n\nAlternatively, maybe the sentence is using a comma splice, but the structure is correct. Wait, the sentence is \"The angrier Mary got, the more she looked at pictures.\" So the first part is a subject, and the second part is the dependent clause. But in English, the structure \"The more X, the more Y\" is used when X and Y are both nouns. So here, \"The angrier Mary got\" is a noun phrase (The angrier Mary) and \"the more she looked...\" is the dependent clause. But the problem is that \"The angrier Mary got\" is not a standard structure. \n\nAlternatively, maybe the sentence is using a relative clause. For example, \"The angrier Mary got, the more she looked...\" but that's not correct. \n\nWait, maybe the sentence is trying to say that as Mary became angrier, the more she looked at pictures. So the structure is \"The angrier Mary got, the more she looked...\" which is a bit awkward. But the main clause is \"the more",
+          "new_tokens": 1024,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "<think>\nOkay, let's see. The sentence is \"The higher the stakes, the lower his expectations are.\" I need to check if it's grammatically correct.\n\nFirst, the structure. It's a comparison using \"the higher the stakes, the lower his expectations are.\" The phrase \"the higher the stakes\" is a common way to express a relationship between two things. So that part seems okay.\n\nNow, the second part: \"the lower his expectations are.\" The verb \"are\" is used here. The subject is \"his expectations,\" which is plural. So \"are\" is correct because it's the third person plural of \"be.\" \n\nWait, but in the first part, \"the higher the stakes\" is a comparative, and the second part is \"the lower his expectations are.\" The structure is \"the higher... the lower...\" which is a standard way to show a cause and effect. So the sentence is using a contrast between the stakes and the expectations.\n\nIs there any issue with the word order? The sentence is a bit of a run-on, but the comma after \"stakes\" is correct. The sentence is a compound sentence with two independent clauses connected by \"the higher... the lower...\" structure. So the comma is properly placed.\n\nAnother thing: \"the lower his expectations are\" – the subject is \"his expectations,\" which is plural, so \"are\" is correct. The verb agrees with the subject. \n\nI don't see any grammatical errors here. The sentence is structured correctly, the verb tenses are consistent, and the comparison is properly made. So the answer should be \"acceptable.\"\n</think>\n\nacceptable",
+          "new_tokens": 335,
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

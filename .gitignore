@@ -1,0 +1,41 @@
+# ===== CoLA-RL 本地尝试产物的忽略清单 =====
+# 创建日期：2026-05-04
+
+# Python 虚拟环境
+.venv-cola/
+.venv/
+venv/
+
+# 下载的大模型权重（本地独立下载，不入库）
+model/Qwen3-0.6B/
+model/Qwen3-1.7B/
+model/Qwen3.5-0.8B/
+model/Qwen3.5-2B/
+
+# 原项目生成的 parquet 数据（由 prepare_rl_data.ipynb 生成）
+# 注意：不要忽略 data/ 整个目录，只忽略 parquet 产物
+data/cola_rl/
+data/cola_sft/
+
+# SFT 训练产出的 LoRA checkpoint（Step 5+）
+my_try/ckpt/
+outputs/
+
+# Python 字节码 / 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter 检查点
+.ipynb_checkpoints/
+
+# 日志与临时文件
+*.log
+nohup.out
+.nfs*
+
+# IDE
+.vscode/
+.idea/
+*.swp
