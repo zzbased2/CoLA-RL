@@ -288,7 +288,7 @@ def evaluate(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", default="cola_data/in_domain_dev.tsv")
-    parser.add_argument("--out", default="my_try/baseline_results.json")
+    parser.add_argument("--out", default="my_try/results/step3_baseline/baseline_results.json")
     parser.add_argument(
         "--models",
         nargs="+",

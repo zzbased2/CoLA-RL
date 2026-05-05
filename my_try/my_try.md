@@ -206,7 +206,7 @@ print(f"模型加载成功，权重占用: {mdl.get_memory_footprint() / 1e9:.2f
 
 ### 2.6 记录环境
 
-按照项目 memory rule，把搭建过程和踩坑点补充到 `my_try/environment.md`。
+按照项目 memory rule，把搭建过程和踩坑点补充到 `my_try/docs/environment.md`。
 
 ---
 
@@ -242,7 +242,7 @@ Your answer:
 
 ### 3.3 脚本设计
 
-新建：`/data/workspace/Github-open/CoLA-RL/my_try/eval_baseline.py`
+新建：`/data/workspace/Github-open/CoLA-RL/my_try/scripts/eval_baseline.py`
 
 ```python
 """
@@ -361,7 +361,7 @@ def evaluate(model_path: str, data_path: str, enable_thinking: bool, max_new_tok
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", default="cola_data/in_domain_dev.tsv")
-    parser.add_argument("--out", default="my_try/baseline_results.json")
+    parser.add_argument("--out", default="my_try/results/step3_baseline/baseline_results.json")
     parser.add_argument("--models", nargs="+", default=[
         "model/Qwen3-0.6B",
         "model/Qwen3-1.7B",
@@ -396,10 +396,10 @@ cd /data/workspace/Github-open/CoLA-RL
 source .venv-cola/bin/activate
 
 # 快速版（非思考模式，预期每个模型 10-20 分钟）
-python my_try/eval_baseline.py --max_new_tokens 32
+python my_try/scripts/eval_baseline.py --max_new_tokens 32
 
 # 思考模式（慢 5-10 倍，约每模型 1-2 小时）
-python my_try/eval_baseline.py --thinking --max_new_tokens 1024
+python my_try/scripts/eval_baseline.py --thinking --max_new_tokens 1024
 ```
 
 **预期结果**（参考原项目 README）：
@@ -413,7 +413,7 @@ python my_try/eval_baseline.py --thinking --max_new_tokens 1024
 
 ### 3.5 输出物
 
-- `my_try/baseline_results.json`：JSON 格式的所有模型结果
+- `my_try/results/step3_baseline/baseline_results.json`：JSON 格式的所有模型结果
 - 日志：标准输出 + MCC 分数
 
 ---
@@ -432,8 +432,8 @@ Qwen3 原生支持 `enable_thinking=True/False`。对比二者：
 **假设**：CoLA 任务是二分类，思考模式是否真的有帮助？
 
 ```bash
-python my_try/eval_baseline.py --models model/Qwen3-0.6B                   # thinking=False
-python my_try/eval_baseline.py --models model/Qwen3-0.6B --thinking        # thinking=True
+python my_try/scripts/eval_baseline.py --models model/Qwen3-0.6B                   # thinking=False
+python my_try/scripts/eval_baseline.py --models model/Qwen3-0.6B --thinking        # thinking=True
 ```
 
 ### 4.2 Prompt 敏感性测试
@@ -537,7 +537,7 @@ source \t label \t first_label \t text
 
 ### 5.3 数据准备脚本
 
-新建：`my_try/prepare_sft_data.py`
+新建：`my_try/scripts/prepare_sft_data.py`
 
 ```python
 """将 CoLA 训练集转为 trl.SFTTrainer 所需格式"""
@@ -573,7 +573,7 @@ if __name__ == "__main__":
 
 ### 5.4 LoRA SFT 训练脚本
 
-新建：`my_try/train_lora_sft.py`
+新建：`my_try/scripts/train_lora_sft.py`
 
 ```python
 """
@@ -646,7 +646,7 @@ if __name__ == "__main__":
 
 ### 5.5 实验矩阵
 
-> 📌 **根据 Step 4 的结论调整实验计划**（见 `my_try/step4_summary.md §7`）：
+> 📌 **根据 Step 4 的结论调整实验计划**（见 `my_try/docs/step4_summary.md §7`）：
 > 1. **主攻 Qwen3-0.6B**（baseline=0.000，提升空间最大）
 > 2. **1.7B 做对照**（baseline=0.500，看 LoRA 能否再往上推）
 > 3. **Qwen3.5-0.8B 下掉**（架构非标 + baseline 不如 1.7B，性价比低）
@@ -675,7 +675,7 @@ if __name__ == "__main__":
 ### 5.6 评测训练后的 LoRA
 
 ```python
-# my_try/eval_lora.py
+# my_try/scripts/eval_lora.py
 # 用 peft.PeftModel.from_pretrained 加载 LoRA adapter
 # 在 CoLA 验证集上评测 MCC，复用 eval_baseline 的评测逻辑
 ```
@@ -828,7 +828,7 @@ CoLA-RL/
 
 1. **先 review 本文档**，确认流程和重点无误后再开工
 2. **分步执行**，每步完成后更新本文档的状态（✅/⬜）
-3. **遇到坑随时记录**到 `my_try/environment.md`
+3. **遇到坑随时记录**到 `my_try/docs/environment.md`
 4. **每个 Step 结束产出一份简短 `results_*.md`**，沉淀过程
 
 ---
@@ -836,8 +836,8 @@ CoLA-RL/
 **状态追踪**：
 
 - [x] Step 1：下载四个模型 ✅ 2026-05-04 完成，合计 ~12 GB
-- [x] Step 2：创建虚拟环境 + 装依赖 ✅ 2026-05-04 完成（Python 3.12.12 / torch 2.5.1+cu121 / transformers 5.7.0 / trl 1.3.0，详见 `environment.md`；sanity check 通过，Qwen3-0.6B bf16 占 1.19 GB）
-- [x] Step 3：Baseline 评测 ✅ 2026-05-04 完成（零样本非思考，527 样本，合计 6 min；MCC：0.6B=**0.000**、1.7B=**0.500**、3.5-0.8B=**0.340**、3.5-2B=**0.549**；详见 `my_try/baseline_summary.md`）
-- [x] Step 4：不训练对比校验 ✅ 2026-05-04 完成（4 模型 × 4 变体 plain/fewshot/cot/thinking，合计 16 组；另加 5 个经典 ML baseline；**关键结论**：prompt 工程无正收益甚至负收益（CoT 让 1.7B/2B 解析崩溃），**只有 0.6B 能从 thinking 获益（0.000→0.254）**，经典 LR baseline 上限 0.176；**SFT 动机完全成立**。详见 `my_try/step4_summary.md`）
-- [ ] Step 5：LoRA SFT
-- [ ] （暂缓）Step 6：LoRA-RL
+- [x] Step 2：创建虚拟环境 + 装依赖 ✅ 2026-05-04 完成（Python 3.12.12 / torch 2.5.1+cu121 / transformers 5.7.0 / trl 1.3.0，详见 `docs/environment.md`；sanity check 通过，Qwen3-0.6B bf16 占 1.19 GB）
+- [x] Step 3：Baseline 评测 ✅ 2026-05-04 完成（零样本非思考，527 样本，合计 6 min；MCC：0.6B=**0.000**、1.7B=**0.500**、3.5-0.8B=**0.340**、3.5-2B=**0.549**；详见 `my_try/docs/baseline_summary.md`）
+- [x] Step 4：不训练对比校验 ✅ 2026-05-04 完成（4 本地模型 × 4 变体 plain/fewshot/cot/thinking + 5 经典 ML baseline + **4 个 API 大模型** zero-shot；**关键结论**：prompt 工程无正收益，API 模型天花板 0.727 (deepseek-v3-0324)，**推理型模型 hy3-preview 反而最差 0.527**；详见 `my_try/docs/step4_summary.md`）
+- [x] Step 5：LoRA SFT ✅ 2026-05-04 完成（**E1: Qwen3-0.6B + LoRA r=16 → MCC 0.000→0.5406**，**E4: Qwen3-1.7B + LoRA r=16 → MCC 0.500→0.6246**；**额外补做 E1-FULL v2 全参 SFT**：Qwen3-0.6B 0.000→0.5361，显存峰值 13.2 GB 首次充分用满 14G 卡；LoRA 与全参几乎打平 (0.541 vs 0.536)，LoRA 综合性价比更高；详见 `my_try/docs/step5_summary.md`）
+- [ ] Step 6：LoRA-RL（🔄 运行中 @ 2026-05-05 00:45，E1-GRPO: 从 E1 SFT adapter 起点，trl GRPOTrainer + 纯 PyTorch rollout，num_gen=4 / temp=1.2 / beta=0 Dr.GRPO 风格，预计 65 min 跑完 8551 样本 1 epoch；显存仅占 2 GB）

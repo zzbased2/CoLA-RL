@@ -38,6 +38,20 @@
 | B4 | CharNgramLR | char 2-5 gram + TF-IDF + LogisticRegression |
 | B5 | WordNgramLR | word 1-2 gram + TF-IDF + LogisticRegression |
 
+### 2.3 API 大模型（补测，通过 CodeBuddy 开放平台）
+
+本地 14 GB L20 跑不了 32B+ 的模型，但通过 `copilot.tencent.com/v2/chat/completions`
+可以调用闭源/超大模型做同口径 zero-shot 评测，作为"能力天花板"参考。
+
+| 模型 | 平台路由 | 定位 | 脚本 |
+| :--- | :--- | :--- | :--- |
+| `hy3-preview` | 腾讯混元 3.0（推理型）| 国产 thinking 模型 | `my_try/eval_api_models.py` |
+| `deepseek-v3-0324` | DeepSeek V3（0324 快照）| 通用对话 | 同上 |
+| `claude-opus-4.7` | Anthropic 旗舰 | 英语语法任务公认最强 | 同上 |
+| `gemini-3.1-flash-lite` | Google Gemini 3.1 轻量 | 低延迟对话 | 同上 |
+
+Prompt 与本地完全一致（PLAIN_TEMPLATE），max_new_tokens=16（hy3-preview 因思维链太长单独设 1024）。
+
 ---
 
 ## 3. 核心结果表（MCC 为主指标）
@@ -63,33 +77,64 @@
 | B4 CharNgramLR | 0.129 | 0.600 | 26632 特征 |
 | B5 WordNgramLR | **0.176** | 0.636 | 12267 特征，经典 ML 的最高水位 |
 
-### 3.3 全方法并列排序（MCC 降序）
+### 3.3 API 大模型（zero-shot plain）
+
+| 模型 | **MCC** | Accuracy | Parse fail | 耗时/单条 | 备注 |
+| :--- | :-: | :-: | :-: | :-: | :--- |
+| **deepseek-v3-0324** | **0.7268** | 0.882 | 0 | 2.2 s | 与原项目 README 报告 0.726 完美对齐 ✅ |
+| **claude-opus-4.7** | **0.7180** | 0.879 | 0 | 4.1 s | Anthropic 旗舰，语法任务强 |
+| **gemini-3.1-flash-lite** | **0.7030** | 0.873 | 0 | 2.2 s | Google 轻量版也能打 |
+| **hy3-preview** | 0.5274 | 0.797 | 15 | 7.3 s | 国产 thinking 模型，**反而更差** |
+
+**观察**：
+- 三个**通用大模型 MCC 都在 0.70+**，远高于本地 Qwen3 系列 baseline 的 0.50-0.55
+- **hy3-preview 作为推理型模型，在 CoLA 二分类上表现最差**（和 Step 4 §4.3 结论一致：CoLA 不需要 reasoning）
+- 这三个 0.70+ 的模型确定了我们的"**能力天花板**"：Qwen3-0.6B 怎么训也很难突破 0.70（除非蒸馏 CoT）
+
+### 3.4 全方法并列排序（MCC 降序）
 
 | 排名 | 方法 | MCC | 类型 | 耗时 |
 | :-: | :--- | :-: | :-- | :-: |
-| 1 | Qwen3.5-2B (plain) | **0.549** | 2B LLM | 140s |
-| 2 | Qwen3.5-2B (thinking) | 0.483 | 2B LLM + thinking | 5531s |
-| 3 | Qwen3.5-2B (fewshot) | 0.498 | 2B LLM | 34s |
-| 4 | Qwen3-1.7B (plain) | 0.500 | 1.7B LLM | 62s |
-| 5 | Qwen3-1.7B (fewshot) | 0.499 | 1.7B LLM | 20s |
-| 6 | Qwen3-1.7B (thinking) | 0.431 | 1.7B LLM + thinking | 2612s |
-| 7 | Qwen3.5-0.8B (plain) | 0.340 | 0.8B LLM | 114s |
-| 8 | Qwen3-0.6B (thinking) | 0.254 | 0.6B LLM + thinking | 992s |
-| 9 | Qwen3.5-2B (cot) | 0.214 | 2B LLM + CoT | 775s |
-| 10 | Qwen3.5-0.8B (thinking) | 0.211 | 0.8B + thinking | 2398s |
-| 11 | Qwen3.5-0.8B (cot) | 0.203 | 0.8B + CoT | 414s |
-| 12 | Qwen3.5-0.8B (fewshot) | 0.192 | 0.8B LLM | 26s |
-| 13 | **B5 WordNgramLR** | **0.176** | **经典 ML** | **2s** |
-| 14 | Qwen3-1.7B (cot) | 0.139 | 1.7B + CoT | 711s |
-| 15 | B4 CharNgramLR | 0.129 | 经典 ML | 3s |
-| 16 | B3 LengthThresh | 0.078 | 启发式 | <1s |
-| 17 | Qwen3-0.6B (plain/fewshot/cot) | 0.000 | 0.6B LLM | - |
-| 18 | B1 Majority | 0.000 | 启发式 | - |
-| 19 | B2 Random | −0.027 | 启发式 | - |
+| 1 | **deepseek-v3-0324** (API) | **0.727** | API 大模型 | 1173s |
+| 2 | **claude-opus-4.7** (API) | **0.718** | API 大模型 | 2161s |
+| 3 | **gemini-3.1-flash-lite** (API) | **0.703** | API 大模型 | 1171s |
+| 4 | Qwen3.5-2B (plain) | **0.549** | 2B LLM | 140s |
+| 5 | hy3-preview (API) | 0.527 | API thinking 模型 | 3834s |
+| 6 | Qwen3.5-2B (thinking) | 0.483 | 2B LLM + thinking | 5531s |
+| 7 | Qwen3.5-2B (fewshot) | 0.498 | 2B LLM | 34s |
+| 8 | Qwen3-1.7B (plain) | 0.500 | 1.7B LLM | 62s |
+| 9 | Qwen3-1.7B (fewshot) | 0.499 | 1.7B LLM | 20s |
+| 10 | Qwen3-1.7B (thinking) | 0.431 | 1.7B LLM + thinking | 2612s |
+| 11 | Qwen3.5-0.8B (plain) | 0.340 | 0.8B LLM | 114s |
+| 12 | Qwen3-0.6B (thinking) | 0.254 | 0.6B LLM + thinking | 992s |
+| 13 | Qwen3.5-2B (cot) | 0.214 | 2B LLM + CoT | 775s |
+| 14 | Qwen3.5-0.8B (thinking) | 0.211 | 0.8B + thinking | 2398s |
+| 15 | Qwen3.5-0.8B (cot) | 0.203 | 0.8B + CoT | 414s |
+| 16 | Qwen3.5-0.8B (fewshot) | 0.192 | 0.8B LLM | 26s |
+| 17 | **B5 WordNgramLR** | **0.176** | **经典 ML** | **2s** |
+| 18 | Qwen3-1.7B (cot) | 0.139 | 1.7B + CoT | 711s |
+| 19 | B4 CharNgramLR | 0.129 | 经典 ML | 3s |
+| 20 | B3 LengthThresh | 0.078 | 启发式 | <1s |
+| 21 | Qwen3-0.6B (plain/fewshot/cot) | 0.000 | 0.6B LLM | - |
+| 22 | B1 Majority | 0.000 | 启发式 | - |
+| 23 | B2 Random | −0.027 | 启发式 | - |
 
 ---
 
-## 4. 五个关键发现
+## 4. 六个关键发现
+
+### 4.0 API 大模型定义了能力天花板，推理型模型反而偏弱
+
+三个通用大模型（deepseek-v3-0324 / claude-opus-4.7 / gemini-3.1-flash-lite）的 MCC 稳定在 **0.70-0.73**，比本地最强的 Qwen3.5-2B zero-shot (0.549) 高 **+0.16 左右**。
+
+值得注意的是：
+- **hy3-preview 推理型模型 MCC 只有 0.527**，比同平台的 deepseek 低了 0.20
+- 解析失败 15 条（其他三家都 0），证明 thinking 类模型**输出格式不稳定**
+- 再次印证 Step 4 §4.3 的结论：**CoLA 这种"秒级二分类"任务不需要 reasoning**
+
+**锚点意义**：这 3 个 API 模型把我们的能力天花板钉在 **0.73**。0.6B/1.7B 系列通过 LoRA SFT 能达到多少，实际上就是对比"**多大的模型+多轻的训练=多少 MCC**"的性价比。
+
+---
 
 ### 4.1 Qwen3-0.6B 在普通模式下 MCC = 0.000，等同"全说 yes"
 
@@ -223,9 +268,11 @@ WordNgramLR（MCC=0.176）这条**耗时 2 秒的线**非常关键：
 | :--- | :--- |
 | `my_try/eval_baseline.py` | LLM 评测脚本（支持 plain/fewshot/cot/thinking 四种 prompt 变体） |
 | `my_try/eval_classical.py` | 经典 ML baseline 脚本（5 个方法，CPU） |
+| `my_try/eval_api_models.py` | **API 大模型评测脚本**（CodeBuddy 平台，流式） |
 | `my_try/baseline_results.json` | Step 3 zero-shot 4 模型结果（plain 变体） |
 | `my_try/baseline_classical.json` | 5 个经典 baseline 结果 |
 | `my_try/res_{model}_{variant}.json` × 12 | Step 4 各个变体的细节（含前 10 条样本 raw output） |
+| **`my_try/res_api_{model}.json` × 4** | **API 模型 zero-shot 结果**（deepseek / claude / gemini / hy3） |
 | `my_try/baseline_summary.md` | Step 3 汇总（zero-shot） |
 | `my_try/step4_summary.md` | 本文档（Step 4 完整汇总） |
 
@@ -233,6 +280,9 @@ WordNgramLR（MCC=0.176）这条**耗时 2 秒的线**非常关键：
 
 ## 9. 总结一句话
 
-> 四个模型在 CoLA 上的 **免训练上限就是 0.549**（Qwen3.5-2B plain），而 0.6B 在 plain 下 **MCC=0**。
-> prompt 工程（fewshot/cot/thinking）**不能打破规模瓶颈**，甚至会给强模型带来负收益。
+> 本地 4 模型在 CoLA 上的 **免训练上限是 0.549**（Qwen3.5-2B plain），
+> API 大模型的天花板是 **0.73**（deepseek-v3-0324），
+> 而 Qwen3-0.6B 在 plain 下 **MCC=0**。
+> Prompt 工程（fewshot/cot/thinking）**不能打破规模瓶颈**，甚至会给强模型带来负收益。
+> **推理型模型（hy3-preview）在这种简单二分类任务上反而最差**——再次证明 reasoning 不是万能钥匙。
 > 所以 **Step 5 LoRA SFT 的动机完全成立**，尤其是为 Qwen3-0.6B 注入"unacceptable"的判别能力。

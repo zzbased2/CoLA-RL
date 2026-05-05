@@ -25,7 +25,7 @@ from sklearn.pipeline import Pipeline
 
 
 DATA_DIR = Path("cola_data")
-OUT = Path("my_try/baseline_classical.json")
+OUT = Path("my_try/results/step3_baseline/baseline_classical.json")
 RNG_SEED = 42
 
 COLS = ["source", "label", "first_label", "text"]
