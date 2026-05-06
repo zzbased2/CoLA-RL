@@ -1,0 +1,116 @@
+{
+  "source": "lora_eval",
+  "prompt": "plain",
+  "enable_thinking": true,
+  "max_new_tokens": 512,
+  "results": [
+    {
+      "adapter": "my_try/ckpt/Qwen3-1.7B-lora-E4-CoT-r16",
+      "base_model": "model/Qwen3-1.7B",
+      "prompt": "plain",
+      "enable_thinking": true,
+      "max_new_tokens": 512,
+      "batch_size": 4,
+      "samples": 527,
+      "mcc": 0.5643342917099666,
+      "accuracy": 0.8121442125237192,
+      "pred_acc_rate": 0.6793168880455408,
+      "parse_fail": 0,
+      "avg_new_tokens": 78.67552182163188,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            116,
+            46
+          ],
+          [
+            53,
+            312
+          ]
+        ],
+        "tn": 116,
+        "fp": 46,
+        "fn": 53,
+        "tp": 312
+      },
+      "elapsed_sec": 248.8,
+      "throughput_samples_per_sec": 2.118,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence has correct subject-verb agreement (\"sailors rode\") and follows standard word order (SVO). However, the phrase \"rode the breeze clear of the rocks\" is unidiomatic; \"clear of the rocks\" is not a typical complement for \"rode\" in this context. A more natural phrasing would be \"The sailors rode the breeze clear of the rocks\" (though the latter is still awkward).\n</think>\n\nunacceptable",
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence has correct subject-verb agreement (\"weights made\") and follows standard word order. However, the argument structure is problematic: \"made\" is transitive but requires a direct object (e.g., \"the rope stretched\"), not an indirect object (\"the rope stretch\"). The phrasing is also non-idiomatic, as \"stretch over the pulley\" is not a natural expression.\n</think>\n\nunacceptable",
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence \"The mechanical doll wriggled itself loose\" demonstrates correct subject-verb agreement (\"doll\" and \"wriggled\"). The verb \"wriggle\" is intransitive but takes a reflexive pronoun (\"itself\") as its object, which is idiomatic for describing a doll's movement. The word order follows standard English SV (Subject-Verb) structure with the reflexive pronoun appropriately placed.\n</think>\n\nacceptable",
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence demonstrates correct subject-verb agreement (\"you had eaten,\" \"you would want\") and proper argument structure with transitive verbs (\"eaten,\" \"want\") selecting appropriate complements (\"more,\" \"less\"). The word order follows standard English syntax, and the conditional inversion (\"If you had eaten\") is idiomatic.\n</think>\n\nacceptable",
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nThe sentence exhibits correct subject-verb agreement (\"you eat,\" \"you want\") and follows standard word order. However, the argument structure is problematic: \"eat the most\" and \"want the least\" are semantically incoherent, as eating more typically implies more desire, not less. The idiomaticity is strained due to the illogical relationship between the clauses.\n</think>\n\nunacceptable",
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nThe sentence demonstrates correct subject-verb agreement (\"you would want,\" \"you would eat\") and follows standard word order for comparative clauses (\"The more... the less...\"). The argument structure is transitive (\"want\" and \"eat\" take no direct objects), and the idiomatic use of \"the more... the less...\" is appropriate.\n</think>\n\nacceptable",
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_output": "<think>\nThe sentence has a subject-verb agreement issue (\"John eat\" should be \"John eats\") and an argument structure problem (\"eat\" is intransitive, so \"the more he pays\" is incorrectly used as a resultative complement). The word order is mostly correct, but the idiomaticity is flawed due to the mismatch between the clauses.\n</think>\n\nunacceptable",
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence has subject-verb agreement (\"Mary listens,\" \"she gets\") and correct word order. However, the second clause (\"she gets depressed\") is grammatically incomplete, as it lacks a direct object or complement, making it unidiomatic. The first clause is transitive (\"listens to\"), but the second is intransitive without a clear purpose.\n</think>\n\nunacceptable",
+          "parsed": "unacceptable",
+          "final_pred": "unacceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence demonstrates correct subject-verb agreement (\"Mary got,\" \"she looked\") and follows a comparative structure (\"The angrier... the more...\") with parallel clauses. The word order is standard for a comparative sentence, and the transitive verb \"looked\" selects a direct object (\"at pictures\"). The phrasing is idiomatic and natural.\n</think>\n\nacceptable",
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_output": "<think>\nThe sentence demonstrates correct subject-verb agreement (\"stakes\" and \"expectations are\"). It uses a comparative structure (\"the higher... the lower...\") with parallel clauses, and the word order follows standard English syntax. The verb \"are\" agrees with the plural subject \"expectations,\" and the phrasing is idiomatic.\n</think>\n\nacceptable",
+          "parsed": "acceptable",
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

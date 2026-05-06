@@ -102,6 +102,14 @@ def main() -> int:
         "--max_train_samples", type=int, default=0,
         help=">0 时只取前 N 条训练样本（smoke test 用）"
     )
+    p.add_argument(
+        "--load_in_4bit", action="store_true",
+        help="启用 QLoRA：base model 以 nf4 量化加载，省显存（4B 模型必开）"
+    )
+    p.add_argument(
+        "--optim", default="adamw_torch",
+        help="优化器；QLoRA 建议 adamw_8bit / paged_adamw_8bit"
+    )
     args = p.parse_args()
 
     alpha = args.alpha if args.alpha is not None else 2 * args.rank
@@ -140,12 +148,27 @@ def main() -> int:
     if tok.pad_token_id is None and tok.eos_token_id is not None:
         tok.pad_token = tok.eos_token  # Qwen 等模型没有 pad_token
 
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model,
+    model_kwargs = dict(
         dtype=torch.bfloat16,
         device_map="cuda",
     )
+    if args.load_in_4bit:
+        from transformers import BitsAndBytesConfig
+        bnb_cfg = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+        )
+        model_kwargs["quantization_config"] = bnb_cfg
+        print(f"    🔢 启用 QLoRA：nf4 + double_quant + bf16 compute")
+
+    model = AutoModelForCausalLM.from_pretrained(args.model, **model_kwargs)
     model.config.use_cache = False  # 开 gradient checkpointing 的必要条件
+    if args.load_in_4bit:
+        # QLoRA 必要步骤：prepare_model_for_kbit_training 开启 input_require_grads
+        from peft import prepare_model_for_kbit_training
+        model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     print(f"    加载耗时: {time.time() - t0:.1f}s；显存已占: "
           f"{torch.cuda.memory_allocated() / 1e9:.2f} GB")
 
@@ -185,6 +208,7 @@ def main() -> int:
         # 显存优化
         gradient_checkpointing_kwargs={"use_reentrant": False},
         remove_unused_columns=False,
+        optim=args.optim,
     )
 
     # --- 5. Trainer ---

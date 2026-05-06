@@ -52,6 +52,16 @@ PLAIN_TEMPLATE = (
     "Your answer:"
 )
 
+# v5 专用：强制 CoT prompt，鼓励模型先推理再给答案
+COT_TEMPLATE = (
+    'Decide whether the following sentence is grammatically acceptable or not. '
+    'First, analyze the sentence step by step (subject-verb agreement, argument structure, '
+    'word order, idiomaticity, etc.). '
+    'Then, on the LAST line, output ONLY ONE word: "acceptable" or "unacceptable".\n\n'
+    "Sentence: {sentence}\n\n"
+    "Analysis:"
+)
+
 
 def parse_answer(text: str) -> str | None:
     """与 eval_baseline.py 完全一致的解析逻辑"""
@@ -128,13 +138,20 @@ def make_reward_fn(balanced: bool = False):
     return reward_fn
 
 
-def load_cola_as_prompts(tsv_path: str, tokenizer, max_samples: int = 0) -> Dataset:
+def load_cola_as_prompts(tsv_path: str, tokenizer, max_samples: int = 0,
+                         enable_thinking: bool = False,
+                         prompt_template: str = "plain") -> Dataset:
     """把 CoLA TSV 加载为 GRPO 需要的 prompts-only 数据集。
 
-    trl GRPOTrainer 期望 dataset 至少有 "prompt" 字段（chat messages 或纯 string）。
-    我们用 apply_chat_template 把 user 消息 render 成 tokenizer 已经加了特殊 token 的字符串。
+    prompt_template:
+      - "plain": 原 prompt，要求短答案（v1-v4 用）
+      - "cot":   要求 step-by-step 分析后给答案（v5 用）
+
+    enable_thinking=True 时，Qwen3 chat_template **不会**主动注入 `<think>\\n\\n</think>\\n\\n`
+    占位符，让模型自己生成完整推理链 + 答案。这是原项目 verl 用的方式。
     """
     import pandas as pd
+    template = COT_TEMPLATE if prompt_template == "cot" else PLAIN_TEMPLATE
     df = pd.read_csv(
         tsv_path, sep="\t", header=None,
         names=["source", "label", "first_label", "text"],
@@ -146,13 +163,13 @@ def load_cola_as_prompts(tsv_path: str, tokenizer, max_samples: int = 0) -> Data
 
     rows = []
     for row in df.itertuples(index=False):
-        user_content = PLAIN_TEMPLATE.format(sentence=row.text)
+        user_content = template.format(sentence=row.text)
         messages = [{"role": "user", "content": user_content}]
         prompt_str = tokenizer.apply_chat_template(
             messages,
             tokenize=False,
             add_generation_prompt=True,
-            enable_thinking=False,
+            enable_thinking=enable_thinking,
         )
         gt = "acceptable" if int(row.label) == 1 else "unacceptable"
         rows.append({"prompt": prompt_str, "ground_truth": gt, "sentence": row.text})
@@ -203,6 +220,19 @@ def main() -> int:
         help="启用 class-balanced reward (acc=+1, unacc=+2.378, 错=-1)，"
              "破除不平衡分类的 mode collapse 陷阱（v2）",
     )
+    p.add_argument(
+        "--enable_thinking",
+        action="store_true",
+        help="启用 Qwen3 thinking 模式（chat_template 不注入 </think>，让模型自己生成 "
+             "<think>...</think>{答案}），需配合 max_completion_length=1024+ 使用。"
+             "这是原项目 verl 用的方式（v5）。",
+    )
+    p.add_argument(
+        "--prompt_template",
+        choices=["plain", "cot"],
+        default="plain",
+        help="prompt 模板：plain（短答案，v1-v4 用）或 cot（要求 step-by-step 分析，v5 用）",
+    )
     args = p.parse_args()
 
     alpha = args.alpha if args.alpha is not None else 2 * args.rank
@@ -234,7 +264,9 @@ def main() -> int:
 
     # --- 2. 数据集 ---
     print(f"\n📦 加载训练 prompts: {args.train_tsv}")
-    train_ds = load_cola_as_prompts(args.train_tsv, tok, args.max_train_samples)
+    train_ds = load_cola_as_prompts(args.train_tsv, tok, args.max_train_samples,
+                                    enable_thinking=args.enable_thinking,
+                                    prompt_template=args.prompt_template)
     print(f"   样本数: {len(train_ds)}")
     print(f"   首条 ground_truth: {train_ds[0]['ground_truth']}")
     print(f"   首条 prompt (200 chars): {train_ds[0]['prompt'][:200]}")
@@ -349,6 +381,8 @@ def main() -> int:
         "temperature": args.temperature,
         "top_p": args.top_p,
         "reward_balanced": args.reward_balanced,
+        "enable_thinking": args.enable_thinking,
+        "prompt_template": args.prompt_template,
         "train_samples": len(train_ds),
         "trainable_params": trainable,
         "total_params": total,

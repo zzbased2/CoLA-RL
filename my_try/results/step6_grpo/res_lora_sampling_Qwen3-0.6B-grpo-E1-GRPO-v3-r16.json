@@ -1,0 +1,272 @@
+{
+  "source": "lora_eval_sampling",
+  "results": [
+    {
+      "adapter": "my_try/ckpt/Qwen3-0.6B-grpo-E1-GRPO-v3-r16",
+      "base_model": "model/Qwen3-0.6B",
+      "mode": "sampling_vote",
+      "num_samples": 5,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "max_new_tokens": 8,
+      "samples": 527,
+      "mcc": 0.0,
+      "accuracy": 0.6925996204933587,
+      "pred_acc_rate": 1.0,
+      "parse_fail_rate": 0.0,
+      "confusion_matrix": {
+        "labels": [
+          "unacceptable",
+          "acceptable"
+        ],
+        "matrix": [
+          [
+            0,
+            162
+          ],
+          [
+            0,
+            365
+          ]
+        ],
+        "tn": 0,
+        "fp": 162,
+        "fn": 0,
+        "tp": 365
+      },
+      "elapsed_sec": 7.3,
+      "first_samples": [
+        {
+          "sentence": "The sailors rode the breeze clear of the rocks.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The weights made the rope stretch over the pulley.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The mechanical doll wriggled itself loose.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "If you had eaten more, you would want less.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "As you eat the most, you want the least.",
+          "true": "unacceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The more you would want, the less you would eat.",
+          "true": "unacceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "I demand that the more John eat, the more he pays.",
+          "true": "unacceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "Mary listens to the Grateful Dead, she gets depressed.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable.",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The angrier Mary got, the more she looked at pictures.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable.",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        },
+        {
+          "sentence": "The higher the stakes, the lower his expectations are.",
+          "true": "acceptable",
+          "raw_outputs": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "parsed": [
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable",
+            "acceptable"
+          ],
+          "votes": {
+            "acceptable": 5,
+            "fail": 0
+          },
+          "final_pred": "acceptable"
+        }
+      ]
+    }
+  ]
+}

@@ -9,8 +9,10 @@ venv/
 # 下载的大模型权重（本地独立下载，不入库）
 model/Qwen3-0.6B/
 model/Qwen3-1.7B/
+model/Qwen3-4B/
 model/Qwen3.5-0.8B/
 model/Qwen3.5-2B/
+model/_cache/
 
 # 原项目生成的 parquet 数据（由 prepare_rl_data.ipynb 生成）
 # 注意：不要忽略 data/ 整个目录，只忽略 parquet 产物

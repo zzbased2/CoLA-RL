@@ -63,6 +63,13 @@ def main() -> int:
     p.add_argument("--save_strategy", default="epoch")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--max_train_samples", type=int, default=0)
+    p.add_argument("--optim", default="adamw_torch",
+                   help="优化器；显存吃紧时用 adamw_8bit（bitsandbytes）"
+                        "可把 1.7B 的 optimizer state 从 ~14GB 砍到 ~1.7GB")
+    p.add_argument("--max_steps", type=int, default=-1,
+                   help="smoke test 用，>0 则只跑这么多步")
+    p.add_argument("--eval_strategy", default="epoch",
+                   help="训练中 eval 策略；显存吃紧时设 'no' 关掉，可省 ~0.5-1GB 显存")
     args = p.parse_args()
 
     exp_name = f"{Path(args.model).name}-fullsft-{args.exp}"
@@ -120,7 +127,7 @@ def main() -> int:
         max_length=args.max_length,
         logging_steps=args.logging_steps,
         save_strategy=args.save_strategy,
-        eval_strategy="epoch",
+        eval_strategy=args.eval_strategy,
         save_total_limit=1,  # 全参 ckpt 太大，只留最新
         report_to=[],
         seed=args.seed,
@@ -128,17 +135,20 @@ def main() -> int:
         gradient_checkpointing_kwargs={"use_reentrant": False},
         remove_unused_columns=False,
         # 全参 SFT 特有：可选 optimizer，默认 adamw_torch
-        optim="adamw_torch",
+        optim=args.optim,
+        max_steps=args.max_steps,
     )
 
     # --- 4. Trainer（注意没有 peft_config）---
-    trainer = SFTTrainer(
+    trainer_kwargs = dict(
         model=model,
         args=sft_cfg,
         train_dataset=train_ds,
-        eval_dataset=val_ds,
         processing_class=tok,
     )
+    if args.eval_strategy != "no":
+        trainer_kwargs["eval_dataset"] = val_ds
+    trainer = SFTTrainer(**trainer_kwargs)
 
     trainable, total = 0, 0
     for _, p_ in trainer.model.named_parameters():
@@ -166,6 +176,9 @@ def main() -> int:
         "epochs": args.epochs,
         "effective_bsz": args.bsz * args.grad_accum,
         "lr": args.lr,
+        "lr_scheduler": args.lr_scheduler,
+        "warmup_ratio": args.warmup_ratio,
+        "optim": args.optim,
         "max_length": args.max_length,
         "train_samples": len(train_ds),
         "val_samples": len(val_ds),
